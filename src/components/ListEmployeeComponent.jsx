@@ -25,7 +25,6 @@ class ListEmployeeComponent extends Component {
                                 <th>Employee Name</th>
                                 <th>Employee Task</th>
                                 <th>Employee Branch</th>
-
                                 <th>Actions</th>
                             </tr>
                         </thead>
