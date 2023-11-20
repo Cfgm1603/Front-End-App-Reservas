@@ -1,20 +1,18 @@
 import axios from "axios";
 
-
-
-const EMPLOYEE_API_BASE_URL = "https://localhost:8080/app/customer/getAll";
-const username = "user";
-const password = "user";
-
-var basicAuth = 'Basic ' + btoa(username + ':' + password);
-
-
+const URL = "https://localhost:8080/app/customer/getAll";
 class EmployeeService {
-  getEmployees() {
-    return  axios.get(EMPLOYEE_API_BASE_URL, {
-        headers: { 'Authorization': + basicAuth }
+    getEmployees() {
+    return axios.get(URL,{
+        headers: {
+            "Content-Type": "application/json",
+        },
+        auth: {
+            username: "user",
+            password: "user",
+        }
     });
   }
 }
-
-export default new EmployeeService();
+const servicioEmpleados = new EmployeeService();
+export default servicioEmpleados;

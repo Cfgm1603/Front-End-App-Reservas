@@ -4,6 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import App from "./App";
+// import proxy from "./proxy";
+
+// App.use(proxy);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

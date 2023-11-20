@@ -35,8 +35,8 @@ class ListEmployeeComponent extends Component {
                                     employee =>
                                         <tr key={employee.id}>
                                             <td>{employee.name}</td>
-                                            <td>{employee.task}</td>
-                                            <td>{employee.branch}</td>
+                                            <td>{employee.email}</td>
+                                            <td>{employee.phoneNumber}</td>
                                         </tr>
                                 )
                             }
