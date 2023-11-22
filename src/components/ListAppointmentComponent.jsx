@@ -8,14 +8,14 @@ class ListAppointmentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employees: [],
+      appointments: [],
     };
     
   }
 
   componentDidMount() {
     AppointmentService.getAppointments().then((res) => {
-      this.setState({employees: res.data});
+      this.setState({appointments: res.data});
     });
 
     AppointmentService.createAppointment();
@@ -26,7 +26,7 @@ class ListAppointmentComponent extends Component {
   render() {
     return (
       <div>
-        <h2 className="text-center">Employee List</h2>
+        <h2 className="text-center">Appointment List</h2>
         <div className='row'>
           {/* <button className="btn btn-primary" onClick={this.addEmployee}>Add Employee</button> */}
         </div>
@@ -34,21 +34,23 @@ class ListAppointmentComponent extends Component {
           <table className="table table-striped table-bordered">
             <thead>
               <tr>
-                <th>Employee Name</th>
-                <th>Employee Task</th>
-                <th>Employee Branch</th>
+                <th>Appointment type</th>
+                <th>Client Name</th>
+                <th>Employeer Name</th>
+                <th>Price</th>
                 <th>Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {
-                this.state.employees.map(
-                  employee =>
-                    <tr key={employee.appointmentId}>
-                      <td>{employee.state}</td>
-                      <td>{employee.customer.name}</td>
-                      <td>{employee.employee.name}</td>
+                this.state.appointments.map(
+                  appointment =>
+                    <tr key={appointment.appointmentId}>
+                      <td>{appointment.task.name}</td>
+                      <td>{appointment.customer.name}</td>
+                      <td>{appointment.employee.name}</td>
+                      <td>{appointment.task.price}</td>
                     </tr>
                 )
               }

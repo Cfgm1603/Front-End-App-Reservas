@@ -9,7 +9,6 @@ function App() {
   return (
     <div>
       <Router>
-        
           <HeaderComponent />
           <div className="container">
             <Routes>

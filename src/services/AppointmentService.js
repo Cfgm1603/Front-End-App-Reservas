@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const appointmentData = {
-    date: "2023-12-20",
+    date: "2023-12-21",
     startTime: "11:00:00",
     endTime: "12:00:00",
     state: "Active",
-    customerId: 2,
+    customerId: 3,
     taskId: 1,
     employeeId: 1,
   };
