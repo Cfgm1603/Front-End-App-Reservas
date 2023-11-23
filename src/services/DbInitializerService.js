@@ -43,49 +43,31 @@ const branchData = {
 
 const nutritivos =[ 
     {
-        name: "Farro",
-        taskId: 1,
-        branchId: 1,
+        name: "Farro", taskId: 1, branchId: 1,
     },
     {
-        name: "Cesar",
-        taskId: 2,
-        branchId: 1,
+        name: "Cesar", taskId: 2, branchId: 1,
     },
     {
-        name: "Juan Diego",
-        taskId: 3,
-        branchId: 1,
+        name: "Juan Diego", taskId: 3, branchId: 1,
     },
     {
-        name: "Deutsch",
-        taskId: 1,
-        branchId: 1,
+        name: "Deutsch", taskId: 1, branchId: 1,
     },
     {
-        name: "JJ",
-        taskId: 2,
-        branchId: 1,
+        name: "JJ", taskId: 2, branchId: 1,
     },
     {
-        name: "Tomas",
-        taskId: 3,
-        branchId: 1,
+        name: "Tomas", taskId: 3, branchId: 1,
     },
     {
-        name: "Gabo",
-        taskId: 1,
-        branchId: 1,
+        name: "Gabo", taskId: 1, branchId: 1,
     },
     {
-        name: "Julian",
-        taskId: 2,
-        branchId: 1,
+        name: "Julian", taskId: 2, branchId: 1,
     },
     {
-        name: "Fer",
-        taskId: 3,
-        branchId: 1,
+        name: "Fer", taskId: 3, branchId: 1,
     },
 ];
 
