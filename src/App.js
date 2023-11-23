@@ -5,23 +5,26 @@ import ListAppointmentComponent from "./components/ListAppointmentComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import CreateAppointmentComponent from "./components/CreateAppointmentComponent";
+import UpdateAppointmentComponent from "./components/UpdateAppointmentComponent";
+
 function App() {
-  return (
-    <div>
-      <Router>
-          <HeaderComponent />
-          <div className="container">
-            <Routes>
-              <Route path="/" exact element={<ListAppointmentComponent />} />
-              <Route path="/appointments" exact element={<ListAppointmentComponent />} />
-              <Route path="/add-appointment" exact element={<CreateAppointmentComponent />} />
-            </Routes>
-          </div>
-          <FooterComponent />
-       
-      </Router>
-    </div>
-  );
+    return (
+        <div>
+            <Router>
+                <HeaderComponent/>
+                <div className="container">
+                    <Routes>
+                        <Route path="/" exact element={<ListAppointmentComponent/>}/>
+                        <Route path="/appointments" exact element={<ListAppointmentComponent/>}/>
+                        <Route path="/add-appointment" exact element={<CreateAppointmentComponent/>}/>
+                        <Route path="/update-appointment" exact element={<UpdateAppointmentComponent/>}/>
+                    </Routes>
+                </div>
+                <FooterComponent/>
+
+            </Router>
+        </div>
+    );
 }
 
 export default App;
