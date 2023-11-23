@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import EmployeeService from "../services/AppointmentService";
 import AppointmentService from "../services/AppointmentService";
 import {Link} from "react-router-dom";
+import UpdateAppointmentComponent from "./UpdateAppointmentComponent";
+import app from "../App";
 
 class ListAppointmentComponent extends Component {
     constructor(props) {
@@ -19,15 +21,13 @@ class ListAppointmentComponent extends Component {
         AppointmentService.getAppointments().then((res) => {
             this.setState({appointments: res.data});
         });
-
-        //ignorar solo es para poder probar POST en la api
-        AppointmentService.createAppointment();
     }
 
     render() {
         return (
             <div>
                 <h2 className="text-center">Appointment List</h2>
+                <p className="text-center">Remember that the hour is managed in Military hour.</p>
 
                 {/* Aca se crea una tabla */}
                 <div className="row">
@@ -35,11 +35,13 @@ class ListAppointmentComponent extends Component {
                         <thead>
                         {/* //campos de la tabla */}
                         <tr>
+                            <th>Appointment ID</th>
                             <th>Appointment type</th>
                             <th>Client Name</th>
                             <th>Employeer Name</th>
                             <th>Price</th>
-                            <th>Actions</th>
+                            <th>Update</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         {/* aca se llena la tabla con la data de la api */}
@@ -47,23 +49,36 @@ class ListAppointmentComponent extends Component {
                         {this.state.appointments.map((appointment) => (
                             <tr key={appointment.appointmentId}>
                                 {/* fijarse que si el dato estaba dentro de otro objeto toca llamarlo */}
+                                <td>{appointment.appointmentId}</td>
                                 <td>{appointment.task.name}</td>
                                 <td>{appointment.customer.name}</td>
                                 <td>{appointment.employee.name}</td>
                                 <td>{appointment.task.price}</td>
                                 <td>
-                                    <Link to="/update-appointment">
-                                        <button className="btn btn-info">Update</button>
-                                    </Link>
+                                    <UpdateAppointmentComponent appointment={appointment}/>
+                                </td>
+                                <td>
+                                    <center>
+                                        <button
+                                            onClick={() => {
+                                                AppointmentService.deleteAppointments(appointment.appointmentId);
+                                                window.location.reload();
+                                            }}
+                                            className="btn btn-danger">
+                                            Delete
+                                        </button>
+                                    </center>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <div>
+                        <center>
                         <Link to="/add-appointment">
-                            <button className="btn btn-primary">Make an appointment</button>
+                            <button className="btn btn-primary">Create new Appointment</button>
                         </Link>
+                        </center>
                     </div>
                 </div>
             </div>
