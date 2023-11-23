@@ -38,7 +38,9 @@ class ListAppointmentComponent extends Component {
                             <th>Appointment ID</th>
                             <th>Appointment type</th>
                             <th>Client Name</th>
-                            <th>Employeer Name</th>
+                            <th>Employee Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
                             <th>Price</th>
                             <th>Update</th>
                             <th>Delete</th>
@@ -54,6 +56,8 @@ class ListAppointmentComponent extends Component {
                                 <td>{appointment.task.name}</td>
                                 <td>{appointment.customer.name}</td>
                                 <td>{appointment.employee.name}</td>
+                                <td>{appointment.startTime}</td>
+                                <td>{appointment.endTime}</td>
                                 <td>{appointment.task.price}</td>
                                 <td>
                                     <UpdateAppointmentComponent appointment={appointment}/>

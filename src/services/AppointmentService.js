@@ -1,6 +1,6 @@
 import axios from "axios";
 import taskService from "./TaskService";
-import { log } from "util";
+import employeeService from "./EmployeeService";
 
 const appointmentData = {
   date: "2023-12-21",
@@ -58,8 +58,8 @@ class AppointmentService {
     let taskName = "";
     let taskDuration = 0;
     
-      taskName = task.name;
-      taskDuration = task.duration;
+    taskName = task.name;
+    taskDuration = task.duration;
     
 
     console.log("taskName: " + taskName);
@@ -91,6 +91,8 @@ class AppointmentService {
 
             // for element in list add it to res_appointments
             for (let i = 0; i < list.length; i++) {
+              // let employee = await employeeService.getEmployeeByID(list[i].employeeId);
+
               const availableAppointment = {
                 index: option_counter++,
                 date: date,
