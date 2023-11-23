@@ -1,30 +1,29 @@
-import React, { Component } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {Component} from "react";
+import {useNavigate} from "react-router-dom";
 import EmployeeService from "../services/AppointmentService";
 import AppointmentService from "../services/AppointmentService";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class ListAppointmentComponent extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
     //Aca se crea un state, estos son como objetos que viven dentro de React y se pueden modificar mediante setters
     this.state = {
       appointments: [],
     };
 
-    
+
   }
 
-  //Aca se crea un metodo que se ejecuta cuando se carga el componente, meaning que si se actualizan datos, el actualiza el componente (el front)
-  componentDidMount() {
-    AppointmentService.getAppointments().then((res) => {
-      this.setState({ appointments: res.data });
-    });
+    //Aca se crea un metodo que se ejecuta cuando se carga el componente, meaning que si se actualizan datos, el actualiza el componente (el front)
+    componentDidMount() {
+        AppointmentService.getAppointments().then((res) => {
+            this.setState({appointments: res.data});
+        });
 
-  
-    
-  }
+
+    }
 
   render() {
     return (
