@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppointmentService from "../services/AppointmentService";
 import {Link} from "react-router-dom";
+import taskService from "../services/TaskService";
 
 
 
@@ -8,6 +9,15 @@ function SearchAvailabilityComponent() {
   const [appointments, setAppointments] = useState([]);
   const [date, setDate] = useState("");
   const [taskId, setTaskId] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  // make function to get tasks as soon as the page loads
+  useEffect(() => {
+    taskService.getTasks().then((res) => {
+        setTasks(res.data);
+    });
+  }, []);
+
   const searchAvailability = async (e) => {
     e.preventDefault();
 
@@ -45,13 +55,18 @@ function SearchAvailabilityComponent() {
               <form>
                 <div className="form-group">
                   <label>Appointment task ID</label>
-                  <input
-                    placeholder="Appointment type ID"
+                  <select
                     name="taskId"
                     className="form-control"
                     value={taskId}
                     onChange={changeTypeHandlerTask}
-                  />
+                  >
+                    {tasks.map((task) => (
+                      <option key={task.taskId} value={task.taskId}>
+                        {task.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="form-group">
                   <label>Date (with the "-")</label>
@@ -88,11 +103,10 @@ function SearchAvailabilityComponent() {
         <table className="table table-striped table-bordered">
           <thead>
             <tr>
-              <th>Date</th>
               <th>Start Time</th>
               <th>End Time</th>
               <th>Task Name</th>
-              <th>Employee ID</th>
+              <th>Employee Name</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -100,11 +114,10 @@ function SearchAvailabilityComponent() {
             {appointments &&
               appointments.map((appointment) => (
                 <tr key={appointment.index}>
-                  <td>{appointment.date}</td>
                   <td>{appointment.startTime}</td>
                   <td>{appointment.endTime}</td>
                   <td>{appointment.taskName}</td>
-                  <td>{appointment.employeeId}</td>
+                  <td>{appointment.employeeName}</td>
                   <Link to="/appointments">
                   <button
                     onClick={() => {

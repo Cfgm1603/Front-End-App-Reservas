@@ -92,6 +92,10 @@ class DbInitializerService {
     async checkDataExists() {
         try {
           const employees = await axios.get(EMPLOYEE_GETALL_URL, this.authConfig);
+
+          setTimeout(() => {
+            console.log("Waiting for database to start...");
+            }, 1000);
           // Check if employees data already exists
           if (employees.data && employees.data.length > 0) {
             console.log("Employees data already exists. Skipping creation.");

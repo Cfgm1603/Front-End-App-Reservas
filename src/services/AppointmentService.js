@@ -1,6 +1,7 @@
 import axios from "axios";
 import taskService from "./TaskService";
 import employeeService from "./EmployeeService";
+import { log } from "util";
 
 const appointmentData = {
   date: "2023-12-21",
@@ -60,6 +61,13 @@ class AppointmentService {
     
     taskName = task.name;
     taskDuration = task.duration;
+
+    let employees_list = (await employeeService.getEmployees()).data;
+    console.log("employees_list: " + employees_list);
+
+    // look for an employee with a specific id
+    // let employee = employees_list.find(element => element.employeeId == 3);
+    // console.log("employee found: " + employee.name);
     
 
     console.log("taskName: " + taskName);
@@ -91,7 +99,10 @@ class AppointmentService {
 
             // for element in list add it to res_appointments
             for (let i = 0; i < list.length; i++) {
-              // let employee = await employeeService.getEmployeeByID(list[i].employeeId);
+              let employee = employees_list.find(element => element.employeeId == list[i].employeeId);
+
+
+              let employeeName = employee.name; 
 
               const availableAppointment = {
                 index: option_counter++,
@@ -103,6 +114,7 @@ class AppointmentService {
                 taskId: taskId,
                 taskName: taskName,
                 employeeId: list[i].employeeId,
+                employeeName: employeeName
               };
               res_appointments.push(availableAppointment);
               // console.log(availableAppointment);

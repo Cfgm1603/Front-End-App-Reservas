@@ -16,8 +16,13 @@ function App() {
         const initializeDatabase = async () => {
             await DbInitializerService.initializeDatabase();
         };
-        initializeDatabase();
-    }, []);
+
+        DbInitializerService.initializeDatabase().then((res) => {
+            if (res) {
+                initializeDatabase();
+            }
+        });
+     }, []);
 
     return (
         <div>
