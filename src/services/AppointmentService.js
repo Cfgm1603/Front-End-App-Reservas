@@ -20,7 +20,7 @@ const APPOINTMENT_GETALL_URL = url + "/app/appointments/getAll";
 const APPOINTMENT_GET_BY_ID_URL = url + "/app/getMyAppointment";
 const APPOINTMENT_GET_AVAILABLE_EMPLOYEES_URL = url + "/app/appointments/getAvailable";
 const APPOINTMENT_UPDATE_URL = url + "/app/appointment/update";
-const APPOINTMENT_DELETE_URL = url + "/app/appointment/delete";
+const APPOINTMENT_DELETE_URL = url + "/app/appointment/delete/";
 
 
 const authConfig = {
@@ -122,8 +122,8 @@ class AppointmentService {
     return res_appointments;
   }
 
-  deleteAppointments(id) {
-    return axios.delete(APPOINTMENT_DELETE_URL + id, authConfig);
+  deleteAppointments(appointmentId) {
+    return axios.delete(APPOINTMENT_DELETE_URL + appointmentId, authConfig);
   }
 
   updateAppointment(appointment) {
