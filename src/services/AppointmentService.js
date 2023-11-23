@@ -1,4 +1,5 @@
 import axios from "axios";
+import { log } from "util";
 
 const appointmentData = {
     date: "2023-12-21",
@@ -39,44 +40,76 @@ class AppointmentService {
     return axios.get(APPOINTMENT_GETALL_URL, authConfig);
   }
 
-  createAppointment() {
-    const response = axios.post(APPOINTMENT_CREATION_URL, appointmentData, authConfig);
-
-
-
-
-  
-
-createAppointment(appointment) {
-    const response = axios.post(APPOINTMENT_CREATION_URL , appointment, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      auth: {
-        username: "user",
-        password: "user",
-      },
-    });
+  createAppointment(appointment) {
+    const response = axios.post(APPOINTMENT_CREATION_URL , appointment, authConfig);
 
     return response.data;
   }
 
-  getAppointmentsAvailableByTaskAndDate(){//taskId, date) {
+  getAppointmentsAvailableByTaskAndDate(taskId, date) {
     console.log("getting available appointments");
-    
-    // const params = new URLSearchParams();
-    // params.append('taskId', '1');
-    // params.append('date', '2023-11-04');
-    // params.append('startTime', '15:00:00');
-    // params.append('endTime', '15:00:00');
+    const openingHours = {
+      startTime: 11,
+      endTime: 17
+    };
 
-    // const queryString = `${APPOINTMENT_GET_AVAILABLE_EMPLOYEES_URL}?${params.toString()}`;
+    // let taskId = 1;
+    // let date = "2023-11-04";
 
-    // const response = axios.get(queryString,authConfig);
+    let taskDuration = 1;
 
-    // console.log(response);
+    let res_appointments = [];
 
-    // return response.data;
+    let option_counter = 1;
+
+    for (let i = openingHours.startTime; i <= openingHours.endTime - taskDuration; i++) {
+      let startTime = i;
+      let endTime = i + taskDuration;
+
+      if (endTime <= openingHours.endTime) {
+        const params = new URLSearchParams();
+        params.append('taskId', taskId);
+        params.append('date', date);
+        params.append('startTime', startTime + ":00:00");
+        params.append('endTime', endTime + ":00:00");
+
+        const queryString = `${APPOINTMENT_GET_AVAILABLE_EMPLOYEES_URL}?${params.toString()}`;
+        // console.log(queryString);
+
+
+        
+        axios.get(queryString, authConfig)
+        .then(response => {
+          let list = response.data;
+          
+          // for element in list add it to res_appointments
+          for (let i = 0; i < list.length; i++) {
+            const availableAppointment = {
+              index : option_counter++,
+              date: date,
+              startTime: startTime + ":00:00",
+              endTime: endTime + ":00:00",
+              state: "Active",
+              customerId: 1,
+              taskId: taskId,
+              employeeId: list[i].employeeId,
+            };
+            res_appointments.push(availableAppointment);
+            // console.log(availableAppointment);
+          }
+          
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+
+
+
+      }
+    }
+
+    return res_appointments;
   }
 }
 

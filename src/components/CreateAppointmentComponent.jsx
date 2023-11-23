@@ -5,7 +5,7 @@ import AppointmentService from "../services/AppointmentService";
 export default class CreateAppointmentComponent extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       state: "Active",
       employeeId: "",
@@ -14,9 +14,8 @@ export default class CreateAppointmentComponent extends Component {
       endTime: "",
       customerId: "1",
       taskId: "",
-      appointments: []
+      appointments: [],
     };
-
   }
 
   saveAppointment = (e) => {
@@ -28,30 +27,54 @@ export default class CreateAppointmentComponent extends Component {
       startTime: this.state.startTime,
       endTime: this.state.endTime,
       customerId: 1,
-      taskId: this.state.taskId
+      taskId: this.state.taskId,
     };
 
     AppointmentService.createAppointment(appointment);
-  }
+  };
+
+  searchAvailability = async (e) => {
+    e.preventDefault();
+  
+    let date = this.state.date;
+    let taskId = this.state.taskId;
+  
+    try {
+      let available = await AppointmentService.getAppointmentsAvailableByTaskAndDate(
+        taskId,
+        date
+      );
+  
+      console.log('Available appointments:', available); // Check the fetched data
+  
+      // Update the state after receiving the response
+      this.setState({ appointments: available }, () => {
+        console.log('Appointments state updated:', this.state.appointments); // Check the state after update
+      });
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  };
+
   changeTypeHandlerTask = (event) => {
     this.setState({ taskId: event.target.value });
-  }
+  };
 
   changeTypeHandlerEmployer = (event) => {
     this.setState({ employeeId: event.target.value });
-  }
+  };
 
   changeTypeHandlerDate = (event) => {
     this.setState({ date: event.target.value });
-  }
+  };
 
   changeTypeHandlerStartTime = (event) => {
     this.setState({ startTime: event.target.value });
-  }
+  };
 
   changeTypeHandlerEndTime = (event) => {
     this.setState({ endTime: event.target.value });
-  } 
+  };
 
   render() {
     return (
@@ -113,14 +136,42 @@ export default class CreateAppointmentComponent extends Component {
                     />
                   </div>
                   <Link to="/">
-                          <button className="btn btn-success" onClick={this.saveAppointment}>Save</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={this.saveAppointment}
+                    >
+                      Save
+                    </button>
                   </Link>
-                  
+
                   <Link to="/">
                     <button className="btn btn-danger">Cancel</button>
                   </Link>
+                  <button
+                    className="btn btn-success"
+                    onClick={this.searchAvailability}
+                  >
+                    Search
+                  </button>
                 </form>
               </div>
+            </div>
+          </div>
+          <div>
+          <h2 className="text-center">Available Appointments</h2>
+            <div className="row">
+            <table className="table table-striped table-bordered">
+              <tbody>
+                {this.state.appointments.map((appointment) => (
+                  <tr key={appointment.index}>
+                    {Object.values(appointment).map((val) => (
+                    <td>{val}</td>
+                    ))}
+                    {/* <button className="btn btn-info">Reserve</button> */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
             </div>
           </div>
         </div>
