@@ -6,6 +6,7 @@ import ListAppointmentComponent from './components/ListAppointmentComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import CreateAppointmentComponent from './components/CreateAppointmentComponent';
+import UpdateAppointmentComponent from "./components/UpdateAppointmentComponent";
 import DbInitializerService from './services/DbInitializerService';
 
 function App() {
@@ -18,21 +19,6 @@ function App() {
     initializeDatabase();
   }, []);
 
-  return (
-    <div>
-      <Router>
-        <HeaderComponent />
-        <div className="container">
-          <Routes>
-            <Route path="/" exact element={<ListAppointmentComponent />} />
-            <Route path="/appointments" exact element={<ListAppointmentComponent />} />
-            <Route path="/add-appointment" exact element={<CreateAppointmentComponent />} />
-          </Routes>
-        </div>
-        <FooterComponent />
-      </Router>
-    </div>
-  );
     return (
         <div>
             <Router>
