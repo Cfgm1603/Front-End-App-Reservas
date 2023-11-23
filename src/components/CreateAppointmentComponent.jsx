@@ -14,7 +14,7 @@ export default class CreateAppointmentComponent extends Component {
       endTime: "",
       customerId: "1",
       taskId: "",
-      appointments: [],
+      appointments: []
     };
   }
 
@@ -27,7 +27,7 @@ export default class CreateAppointmentComponent extends Component {
       startTime: this.state.startTime,
       endTime: this.state.endTime,
       customerId: 1,
-      taskId: this.state.taskId,
+      taskId: this.state.taskId
     };
 
     AppointmentService.createAppointment(appointment);
@@ -56,6 +56,8 @@ export default class CreateAppointmentComponent extends Component {
     }
   };
 
+  
+
   changeTypeHandlerTask = (event) => {
     this.setState({ taskId: event.target.value });
   };
@@ -77,6 +79,7 @@ export default class CreateAppointmentComponent extends Component {
   };
 
   render() {
+    console.log('Appointments:', this.state.appointments);
     return (
       <div>
         <div className="container">
@@ -159,22 +162,37 @@ export default class CreateAppointmentComponent extends Component {
           </div>
           <div>
           <h2 className="text-center">Available Appointments</h2>
-            <div className="row">
-            <table className="table table-striped table-bordered">
-              <tbody>
-                {this.state.appointments.map((appointment) => (
-                  <tr key={appointment.index}>
-                    {Object.values(appointment).map((val) => (
-                    <td>{val}</td>
-                    ))}
-                    {/* <button className="btn btn-info">Reserve</button> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            </div>
+            
           </div>
         </div>
+        <div className="row">
+            <table className="table table-striped table-bordered">
+            <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>State</th>
+            <th>Customer ID</th>
+            <th>Task ID</th>
+            <th>Employee ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.appointments.map((appointment, index) => (
+            <tr key={index}>
+              <td>{appointment.date}</td>
+              <td>{appointment.startTime}</td>
+              <td>{appointment.endTime}</td>
+              <td>{appointment.state}</td>
+              <td>{appointment.customerId}</td>
+              <td>{appointment.taskId}</td>
+              <td>{appointment.employeeId}</td>
+            </tr>
+          ))}
+        </tbody>
+            </table>
+            </div>
       </div>
     );
   }
