@@ -5,7 +5,7 @@ const appointmentData = {
     startTime: "11:00:00",
     endTime: "12:00:00",
     state: "Active",
-    customerId: 3,
+    customerId: 1,
     taskId: 1,
     employeeId: 1,
   };
@@ -17,6 +17,7 @@ const APPOINTMENT_GETALL_URL = "http://localhost:8080/app/appointments/getAll";
 
 
 class AppointmentService {
+
     getAppointments() {
     return axios.get(APPOINTMENT_GETALL_URL,{
         headers: {

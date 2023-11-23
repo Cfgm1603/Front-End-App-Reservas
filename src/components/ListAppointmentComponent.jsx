@@ -28,7 +28,7 @@ class ListAppointmentComponent extends Component {
     return (
       <div>
         <h2 className="text-center">Appointment List</h2>
-        
+
         {/* Aca se crea una tabla */}
         <div className="row">
           <table className="table table-striped table-bordered">
@@ -51,15 +51,20 @@ class ListAppointmentComponent extends Component {
                   <td>{appointment.customer.name}</td>
                   <td>{appointment.employee.name}</td>
                   <td>{appointment.task.price}</td>
+                  <td>
+                    <Link to="/update-appointment">
+                      <button className="btn btn-info">Update</button>
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
           <div>
-          <Link to="/add-appointment">
-            <button className="btn btn-primary">Make an appointment</button>
-          </Link>
-        </div>
+            <Link to="/add-appointment">
+              <button className="btn btn-primary">Make an appointment</button>
+            </Link>
+          </div>
         </div>
       </div>
     );
