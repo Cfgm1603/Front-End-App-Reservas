@@ -1,16 +1,15 @@
 import axios from "axios";
-import { log } from "util";
 
 const appointmentData = {
-    date: "2023-12-21",
-    startTime: "11:00:00",
-    endTime: "12:00:00",
-    state: "Active",
-    customerId: 3,
-    taskId: 1,
-    employeeId: 1,
-  };
-  
+  date: "2023-12-21",
+  startTime: "11:00:00",
+  endTime: "12:00:00",
+  state: "Active",
+  customerId: 3,
+  taskId: 1,
+  employeeId: 1,
+};
+
 
 const url = "http://localhost:8080";
 
@@ -24,11 +23,11 @@ const APPOINTMENT_DELETE_URL = url + "/app/appointment/delete";
 
 const authConfig = {
   headers: {
-      "Content-Type": "application/json",
+    "Content-Type": "application/json",
   },
   auth: {
-      username: "user",
-      password: "user",
+    username: "user",
+    password: "user",
   },
 };
 
@@ -38,8 +37,7 @@ class AppointmentService {
   }
 
   createAppointment(appointment) {
-    const response = axios.post(APPOINTMENT_CREATION_URL , appointment, authConfig);
-
+    const response = axios.post(APPOINTMENT_CREATION_URL, appointment, authConfig);
     return response.data;
   }
 
@@ -74,31 +72,31 @@ class AppointmentService {
         // console.log(queryString);
 
 
-        
+
         axios.get(queryString, authConfig)
-        .then(response => {
-          let list = response.data;
-          
-          // for element in list add it to res_appointments
-          for (let i = 0; i < list.length; i++) {
-            const availableAppointment = {
-              index : option_counter++,
-              date: date,
-              startTime: startTime + ":00:00",
-              endTime: endTime + ":00:00",
-              state: "Active",
-              customerId: 1,
-              taskId: taskId,
-              employeeId: list[i].employeeId,
-            };
-            res_appointments.push(availableAppointment);
-            // console.log(availableAppointment);
-          }
-          
-        })
-        .catch(error => {
-          console.log(error);
-        });
+          .then(response => {
+            let list = response.data;
+
+            // for element in list add it to res_appointments
+            for (let i = 0; i < list.length; i++) {
+              const availableAppointment = {
+                index: option_counter++,
+                date: date,
+                startTime: startTime + ":00:00",
+                endTime: endTime + ":00:00",
+                state: "Active",
+                customerId: 1,
+                taskId: taskId,
+                employeeId: list[i].employeeId,
+              };
+              res_appointments.push(availableAppointment);
+              // console.log(availableAppointment);
+            }
+
+          })
+          .catch(error => {
+            console.log(error);
+          });
 
 
 
@@ -107,6 +105,16 @@ class AppointmentService {
     }
 
     return res_appointments;
+  }
+
+  deleteAppointments(id) {
+    return axios.delete(APPOINTMENT_DELETE_URL + id, authConfig);
+  }
+
+  updateAppointment(appointment) {
+    console.log(appointment)
+    const response = axios.put(APPOINTMENT_UPDATE_URL, appointment, authConfig);
+    return response.data;
   }
 }
 

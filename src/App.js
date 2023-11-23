@@ -10,14 +10,13 @@ import UpdateAppointmentComponent from "./components/UpdateAppointmentComponent"
 import DbInitializerService from './services/DbInitializerService';
 
 function App() {
-  useEffect(() => {
-    // Initialize the database with initial data when the app starts
-    const initializeDatabase = async () => {
-      await DbInitializerService.initializeDatabase();
-    };
-    
-    initializeDatabase();
-  }, []);
+    useEffect(() => {
+        // Initialize the database with initial data when the app starts
+        const initializeDatabase = async () => {
+            await DbInitializerService.initializeDatabase();
+        };
+        initializeDatabase();
+    }, []);
 
     return (
         <div>
@@ -31,11 +30,8 @@ function App() {
                         <Route path="/update-appointment" exact element={<UpdateAppointmentComponent/>}/>
                     </Routes>
                 </div>
-                <FooterComponent/>
-
             </Router>
         </div>
     );
 }
-
 export default App;
