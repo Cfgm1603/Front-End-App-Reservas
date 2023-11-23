@@ -1,15 +1,15 @@
 import axios from "axios";
 
 const appointmentData = {
-  date: "2023-12-21",
-  startTime: "11:00:00",
-  endTime: "12:00:00",
-  state: "Active",
-  customerId: 3,
-  taskId: 1,
-  employeeId: 1,
-};
-
+    date: "2023-12-21",
+    startTime: "11:00:00",
+    endTime: "12:00:00",
+    state: "Active",
+    customerId: 3,
+    taskId: 1,
+    employeeId: 1,
+  };
+  
 
 const url = "http://localhost:8080";
 
@@ -41,6 +41,23 @@ class AppointmentService {
 
   createAppointment() {
     const response = axios.post(APPOINTMENT_CREATION_URL, appointmentData, authConfig);
+
+
+
+
+  
+
+createAppointment(appointment) {
+    const response = axios.post(APPOINTMENT_CREATION_URL , appointment, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      auth: {
+        username: "user",
+        password: "user",
+      },
+    });
+
     return response.data;
   }
 
