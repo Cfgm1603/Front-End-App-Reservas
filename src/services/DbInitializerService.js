@@ -28,7 +28,7 @@ const tasks = [
     {
         name: "Haircut",
         description: "Description Haircut",
-        duration: 2,
+        duration: 3,
         price: 1000,
     },
 ];
@@ -41,7 +41,7 @@ const branchData = {
     closureTime: "17:00:00",
 };
 
-const employeeData =[ 
+const nutritivos =[ 
     {
         name: "Farro",
         taskId: 1,
@@ -57,7 +57,36 @@ const employeeData =[
         taskId: 3,
         branchId: 1,
     },
-
+    {
+        name: "Deutsch",
+        taskId: 1,
+        branchId: 1,
+    },
+    {
+        name: "JJ",
+        taskId: 2,
+        branchId: 1,
+    },
+    {
+        name: "Tomas",
+        taskId: 3,
+        branchId: 1,
+    },
+    {
+        name: "Gabo",
+        taskId: 1,
+        branchId: 1,
+    },
+    {
+        name: "Julian",
+        taskId: 2,
+        branchId: 1,
+    },
+    {
+        name: "Fer",
+        taskId: 3,
+        branchId: 1,
+    },
 ];
 
 const customerData = {
@@ -142,9 +171,9 @@ class DbInitializerService {
     }
 
     async createEmployee() {
-        for (let i = 0; i < employeeData.length; i++) {
+        for (let i = 0; i < nutritivos.length; i++) {
             try {
-                const response = await axios.post(EMPLOYEE_CREATION_URL, employeeData[i], this.authConfig);
+                const response = await axios.post(EMPLOYEE_CREATION_URL, nutritivos[i], this.authConfig);
                 console.log("Employee created:", response.data);
             } catch (error) {
                 console.error("Error creating employee:", error);
