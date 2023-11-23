@@ -1,29 +1,44 @@
-import React, { Component } from "react";
+import React, { Component, Redirect } from "react";
+import { Link } from "react-router-dom";
+import AppointmentService from "../services/AppointmentService";
 
 export default class CreateAppointmentComponent extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      task: "Active",
-      customer: "",
-      employee: "",
-      price: "",
-      type: "",
+      state: "Active",
+      employeeId: "",
       date: "",
       startTime: "",
       endTime: "",
-      taskId: 1,
-      employeeId: 1
+      customerId: "1",
+      taskId: "",
+      appointments: []
     };
+
   }
 
+  saveAppointment = (e) => {
+    e.preventDefault();
+    let appointment = {
+      state: "Active",
+      employeeId: this.state.employeeId,
+      date: this.state.date,
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      customerId: 1,
+      taskId: this.state.taskId
+    };
+
+    AppointmentService.createAppointment(appointment);
+  }
   changeTypeHandlerTask = (event) => {
-    this.setState({ type: event.target.value });
+    this.setState({ taskId: event.target.value });
   }
 
   changeTypeHandlerEmployer = (event) => {
-    this.setState({ customer: event.target.value });
+    this.setState({ employeeId: event.target.value });
   }
 
   changeTypeHandlerDate = (event) => {
@@ -36,7 +51,7 @@ export default class CreateAppointmentComponent extends Component {
 
   changeTypeHandlerEndTime = (event) => {
     this.setState({ endTime: event.target.value });
-  }
+  } 
 
   render() {
     return (
@@ -51,9 +66,9 @@ export default class CreateAppointmentComponent extends Component {
                     <label>Appointment task ID</label>
                     <input
                       placeholder="Appointment type ID"
-                      name="task"
+                      name="taskId"
                       className="form-control"
-                      value={this.state.task}
+                      value={this.state.taskId}
                       onChange={this.changeTypeHandlerTask}
                     />
                   </div>
@@ -61,9 +76,9 @@ export default class CreateAppointmentComponent extends Component {
                     <label>Employeer ID</label>
                     <input
                       placeholder="Employeer ID"
-                      name="customer"
+                      name="employeeId"
                       className="form-control"
-                      value={this.state.customer}
+                      value={this.state.employeeId}
                       onChange={this.changeTypeHandlerEmployer}
                     />
                   </div>
@@ -71,24 +86,39 @@ export default class CreateAppointmentComponent extends Component {
                     <label>Date (with the "-")</label>
                     <input
                       placeholder="yyyy-mm-dd"
-                      name="employee"
+                      name="date"
                       className="form-control"
                       value={this.state.date}
                       onChange={this.changeTypeHandlerDate}
                     />
                   </div>
                   <div className="form-group">
-                    <label>Price</label>
+                    <label>Start hour</label>
                     <input
-                      placeholder="Price"
-                      name="price"
+                      placeholder="hh:mm:ss"
+                      name="startTime"
                       className="form-control"
-                      value={this.state.price}
-                      onChange={this.changeTypeHandlerPrice}
+                      value={this.state.startTime}
+                      onChange={this.changeTypeHandlerStartTime}
                     />
                   </div>
-                  <button className="btn btn-success">Save</button>
-                  <button className="btn btn-danger">Cancel</button>
+                  <div className="form-group">
+                    <label>End hour</label>
+                    <input
+                      placeholder="hh:mm:ss"
+                      name="endTime"
+                      className="form-control"
+                      value={this.state.endTime}
+                      onChange={this.changeTypeHandlerEndTime}
+                    />
+                  </div>
+                  <Link to="/">
+                          <button className="btn btn-success" onClick={this.saveAppointment}>Save</button>
+                  </Link>
+                  
+                  <Link to="/">
+                    <button className="btn btn-danger">Cancel</button>
+                  </Link>
                 </form>
               </div>
             </div>

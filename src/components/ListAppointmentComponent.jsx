@@ -12,6 +12,8 @@ class ListAppointmentComponent extends Component {
     this.state = {
       appointments: [],
     };
+
+    
   }
 
   //Aca se crea un metodo que se ejecuta cuando se carga el componente, meaning que si se actualizan datos, el actualiza el componente (el front)
@@ -20,8 +22,8 @@ class ListAppointmentComponent extends Component {
       this.setState({ appointments: res.data });
     });
 
-    //ignorar solo es para poder probar POST en la api
-    AppointmentService.createAppointment();
+  
+    
   }
 
   render() {
@@ -47,7 +49,7 @@ class ListAppointmentComponent extends Component {
               {this.state.appointments.map((appointment) => (
                 <tr key={appointment.appointmentId}>
                   {/* fijarse que si el dato estaba dentro de otro objeto toca llamarlo */}
-                  <td>{appointment.task.name}</td>
+                  <td>{appointment.task.name}</td >
                   <td>{appointment.customer.name}</td>
                   <td>{appointment.employee.name}</td>
                   <td>{appointment.task.price}</td>

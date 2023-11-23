@@ -31,8 +31,8 @@ class AppointmentService {
   }
   
 
-createAppointment() {
-    const response = axios.post(APPOINTMENT_CREATION_URL , appointmentData, {
+createAppointment(appointment) {
+    const response = axios.post(APPOINTMENT_CREATION_URL , appointment, {
       headers: {
         "Content-Type": "application/json",
       },
