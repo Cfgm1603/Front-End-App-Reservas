@@ -45,8 +45,9 @@ class ListAppointmentComponent extends Component {
                         </tr>
                         </thead>
                         {/* aca se llena la tabla con la data de la api */}
-                        <tbody>
-                        {this.state.appointments.map((appointment) => (
+                        <tbody> 
+                        {this.state.appointments && (this.state.appointments.
+                        map((appointment) => (
                             <tr key={appointment.appointmentId}>
                                 {/* fijarse que si el dato estaba dentro de otro objeto toca llamarlo */}
                                 <td>{appointment.appointmentId}</td>
@@ -70,7 +71,7 @@ class ListAppointmentComponent extends Component {
                                     </center>
                                 </td>
                             </tr>
-                        ))}
+                        )))}
                         </tbody>
                     </table>
                     <div>

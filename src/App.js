@@ -8,6 +8,7 @@ import FooterComponent from './components/FooterComponent';
 import CreateAppointmentComponent from './components/CreateAppointmentComponent';
 import UpdateAppointmentComponent from "./components/UpdateAppointmentComponent";
 import DbInitializerService from './services/DbInitializerService';
+import SearchAvailabilityComponent from './components/SearchAvailabilityComponent';
 
 function App() {
     useEffect(() => {
@@ -26,7 +27,8 @@ function App() {
                     <Routes>
                         <Route path="/" exact element={<ListAppointmentComponent/>}/>
                         <Route path="/appointments" exact element={<ListAppointmentComponent/>}/>
-                        <Route path="/add-appointment" exact element={<CreateAppointmentComponent/>}/>
+                        {/* <Route path="/add-appointment" exact element={<CreateAppointmentComponent/>}/> */}
+                        <Route path="/add-appointment" exact element={<SearchAvailabilityComponent/>}/>
                         <Route path="/update-appointment" exact element={<UpdateAppointmentComponent/>}/>
                     </Routes>
                 </div>

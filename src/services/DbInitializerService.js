@@ -41,11 +41,24 @@ const branchData = {
     closureTime: "17:00:00",
 };
 
-const employeeData = {
-    name: "Farro",
-    taskId: 1,
-    branchId: 1,
-};
+const employeeData =[ 
+    {
+        name: "Farro",
+        taskId: 1,
+        branchId: 1,
+    },
+    {
+        name: "Cesar",
+        taskId: 2,
+        branchId: 1,
+    },
+    {
+        name: "Juan Diego",
+        taskId: 3,
+        branchId: 1,
+    },
+
+];
 
 const customerData = {
     name: "Cesar Gimo",
@@ -125,11 +138,13 @@ class DbInitializerService {
     }
 
     async createEmployee() {
-        try {
-            const response = await axios.post(EMPLOYEE_CREATION_URL, employeeData, this.authConfig);
-            console.log("Employee created:", response.data);
-        } catch (error) {
-            console.error("Error creating employee:", error);
+        for (let i = 0; i < employeeData.length; i++) {
+            try {
+                const response = await axios.post(EMPLOYEE_CREATION_URL, employeeData[i], this.authConfig);
+                console.log("Employee created:", response.data);
+            } catch (error) {
+                console.error("Error creating employee:", error);
+            }
         }
     }
 

@@ -2,6 +2,7 @@ import React, { Component, Redirect } from "react";
 import { Link } from "react-router-dom";
 import AppointmentService from "../services/AppointmentService";
 
+
 export default class CreateAppointmentComponent extends Component {
   constructor(props) {
     super(props);
