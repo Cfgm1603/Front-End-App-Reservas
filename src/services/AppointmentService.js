@@ -32,10 +32,6 @@ const authConfig = {
   },
 };
 
-
-
-const APPOINTMENT_UPDATE_URL = "http://localhost:8080/app/appointments/update";
-
 class AppointmentService {
   getAppointments() {
     return axios.get(APPOINTMENT_GETALL_URL, authConfig);
