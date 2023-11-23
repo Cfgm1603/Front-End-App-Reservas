@@ -11,9 +11,9 @@ const appointmentData = {
   };
   
 
-const APPOINTMENT_CREATION_URL = "https://localhost:8080/app/appointment/create";
+const APPOINTMENT_CREATION_URL = "http://localhost:8080/app/appointment/create";
 
-const APPOINTMENT_GETALL_URL = "https://localhost:8080/app/appointments/getAll";
+const APPOINTMENT_GETALL_URL = "http://localhost:8080/app/appointments/getAll";
 
 
 class AppointmentService {
