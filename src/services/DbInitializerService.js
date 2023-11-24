@@ -28,7 +28,7 @@ const tasks = [
     {
         name: "Haircut",
         description: "Description Haircut",
-        duration: 2,
+        duration: 3,
         price: 1000,
     },
 ];
@@ -41,11 +41,35 @@ const branchData = {
     closureTime: "17:00:00",
 };
 
-const employeeData = {
-    name: "Farro",
-    taskId: 1,
-    branchId: 1,
-};
+const nutritivos =[ 
+    {
+        name: "Farro", taskId: 1, branchId: 1,
+    },
+    {
+        name: "Cesar", taskId: 2, branchId: 1,
+    },
+    {
+        name: "Juan Diego", taskId: 3, branchId: 1,
+    },
+    {
+        name: "Deutsch", taskId: 1, branchId: 1,
+    },
+    {
+        name: "JJ", taskId: 2, branchId: 1,
+    },
+    {
+        name: "Tomas", taskId: 3, branchId: 1,
+    },
+    {
+        name: "Gabo", taskId: 1, branchId: 1,
+    },
+    {
+        name: "Julian", taskId: 2, branchId: 1,
+    },
+    {
+        name: "Fer", taskId: 3, branchId: 1,
+    },
+];
 
 const customerData = {
     name: "Cesar Gimo",
@@ -79,6 +103,10 @@ class DbInitializerService {
     async checkDataExists() {
         try {
           const employees = await axios.get(EMPLOYEE_GETALL_URL, this.authConfig);
+
+          setTimeout(() => {
+            console.log("Waiting for database to start...");
+            }, 1000);
           // Check if employees data already exists
           if (employees.data && employees.data.length > 0) {
             console.log("Employees data already exists. Skipping creation.");
@@ -125,11 +153,13 @@ class DbInitializerService {
     }
 
     async createEmployee() {
-        try {
-            const response = await axios.post(EMPLOYEE_CREATION_URL, employeeData, this.authConfig);
-            console.log("Employee created:", response.data);
-        } catch (error) {
-            console.error("Error creating employee:", error);
+        for (let i = 0; i < nutritivos.length; i++) {
+            try {
+                const response = await axios.post(EMPLOYEE_CREATION_URL, nutritivos[i], this.authConfig);
+                console.log("Employee created:", response.data);
+            } catch (error) {
+                console.error("Error creating employee:", error);
+            }
         }
     }
 

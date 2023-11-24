@@ -1,4 +1,7 @@
 import axios from "axios";
+import taskService from "./TaskService";
+import employeeService from "./EmployeeService";
+import { log } from "util";
 
 const appointmentData = {
   date: "2023-12-21",
@@ -41,17 +44,34 @@ class AppointmentService {
     return response.data;
   }
 
-  getAppointmentsAvailableByTaskAndDate(taskId, date) {
+  async getAppointmentsAvailableByTaskAndDate(taskId, date) {
     console.log("getting available appointments");
     const openingHours = {
       startTime: 11,
       endTime: 17
     };
 
-    // let taskId = 1;
-    // let date = "2023-11-04";
 
-    let taskDuration = 1;
+
+    
+
+    let task = await taskService.getTaskByID(taskId);
+    let taskName = "";
+    let taskDuration = 0;
+    
+    taskName = task.name;
+    taskDuration = task.duration;
+
+    let employees_list = (await employeeService.getEmployees()).data;
+    console.log("employees_list: " + employees_list);
+
+    // look for an employee with a specific id
+    // let employee = employees_list.find(element => element.employeeId == 3);
+    // console.log("employee found: " + employee.name);
+    
+
+    console.log("taskName: " + taskName);
+    console.log("taskDuration: " + taskDuration);
 
     let res_appointments = [];
 
@@ -79,6 +99,11 @@ class AppointmentService {
 
             // for element in list add it to res_appointments
             for (let i = 0; i < list.length; i++) {
+              let employee = employees_list.find(element => element.employeeId == list[i].employeeId);
+
+
+              let employeeName = employee.name; 
+
               const availableAppointment = {
                 index: option_counter++,
                 date: date,
@@ -87,7 +112,9 @@ class AppointmentService {
                 state: "Active",
                 customerId: 1,
                 taskId: taskId,
+                taskName: taskName,
                 employeeId: list[i].employeeId,
+                employeeName: employeeName
               };
               res_appointments.push(availableAppointment);
               // console.log(availableAppointment);

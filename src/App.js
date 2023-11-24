@@ -8,6 +8,7 @@ import FooterComponent from './components/FooterComponent';
 import CreateAppointmentComponent from './components/CreateAppointmentComponent';
 import UpdateAppointmentComponent from "./components/UpdateAppointmentComponent";
 import DbInitializerService from './services/DbInitializerService';
+import SearchAvailabilityComponent from './components/SearchAvailabilityComponent';
 
 function App() {
     useEffect(() => {
@@ -15,8 +16,13 @@ function App() {
         const initializeDatabase = async () => {
             await DbInitializerService.initializeDatabase();
         };
-        initializeDatabase();
-    }, []);
+
+        DbInitializerService.initializeDatabase().then((res) => {
+            if (res) {
+                initializeDatabase();
+            }
+        });
+     }, []);
 
     return (
         <div>
@@ -26,7 +32,8 @@ function App() {
                     <Routes>
                         <Route path="/" exact element={<ListAppointmentComponent/>}/>
                         <Route path="/appointments" exact element={<ListAppointmentComponent/>}/>
-                        <Route path="/add-appointment" exact element={<CreateAppointmentComponent/>}/>
+                        {/* <Route path="/add-appointment" exact element={<CreateAppointmentComponent/>}/> */}
+                        <Route path="/add-appointment" exact element={<SearchAvailabilityComponent/>}/>
                         <Route path="/update-appointment" exact element={<UpdateAppointmentComponent/>}/>
                     </Routes>
                 </div>

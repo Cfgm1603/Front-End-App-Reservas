@@ -38,21 +38,26 @@ class ListAppointmentComponent extends Component {
                             <th>Appointment ID</th>
                             <th>Appointment type</th>
                             <th>Client Name</th>
-                            <th>Employeer Name</th>
+                            <th>Employee Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
                             <th>Price</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         </thead>
                         {/* aca se llena la tabla con la data de la api */}
-                        <tbody>
-                        {this.state.appointments.map((appointment) => (
+                        <tbody> 
+                        {this.state.appointments && (this.state.appointments.
+                        map((appointment) => (
                             <tr key={appointment.appointmentId}>
                                 {/* fijarse que si el dato estaba dentro de otro objeto toca llamarlo */}
                                 <td>{appointment.appointmentId}</td>
                                 <td>{appointment.task.name}</td>
                                 <td>{appointment.customer.name}</td>
                                 <td>{appointment.employee.name}</td>
+                                <td>{appointment.startTime}</td>
+                                <td>{appointment.endTime}</td>
                                 <td>{appointment.task.price}</td>
                                 <td>
                                     <UpdateAppointmentComponent appointment={appointment}/>
@@ -70,7 +75,7 @@ class ListAppointmentComponent extends Component {
                                     </center>
                                 </td>
                             </tr>
-                        ))}
+                        )))}
                         </tbody>
                     </table>
                     <div>
